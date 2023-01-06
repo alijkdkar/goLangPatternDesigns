@@ -82,6 +82,9 @@ func f3() error {
 func main() {
 
 	c := newChainBuilder()
-	firstStep := c.SetNextStep(NewStep(f1)).SetNextStep(NewStep(f2)).SetNextStep(NewStep(f3)).build()
+	firstStep := c.SetNextStep(NewStep(f1)).SetNextStep(NewStep(f2)).SetNextStep(NewStep(f3)).SetNextStep(NewStep(func() error {
+		fmt.Println("i'm a anonymous func")
+		return nil
+	})).build()
 	firstStep.Execute()
 }
